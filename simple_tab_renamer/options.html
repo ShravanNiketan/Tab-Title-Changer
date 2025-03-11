@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Tab Renamer Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Simple Tab Renamer</h1>
+      <p>Customize your browser tabs and boost your productivity</p>
+    </header>
+
+    <div class="tab-navigation">
+      <button id="tab-general" class="tab-btn active">General Settings</button>
+      <button id="tab-templates" class="tab-btn">Template Examples</button>
+      <button id="tab-compatibility" class="tab-btn">Compatibility</button>
+      <button id="tab-about" class="tab-btn">About</button>
+    </div>
+
+    <!-- General Settings Tab -->
+    <div id="general-content" class="tab-content active">
+      <div class="option-group">
+        <h3>Default Behavior</h3>
+        
+        <div class="option-row">
+          <label for="defaultPrefix">Default Prefix:</label>
+          <input type="text" id="defaultPrefix" placeholder="Enter default prefix (optional)">
+        </div>
+        
+        <div class="option-row">
+          <label for="defaultSuffix">Default Suffix:</label>
+          <input type="text" id="defaultSuffix" placeholder="Enter default suffix (optional)">
+          <div class="hint">These are applied when using the auto-apply setting or quick apply option.</div>
+        </div>
+        
+        <div class="option-row">
+          <label for="promptBehavior">Prompt Behavior:</label>
+          <select id="promptBehavior">
+            <option value="always">Always show prompt</option>
+            <option value="autoApply">Auto-apply settings (no prompt)</option>
+            <option value="askOnce">Ask once per domain</option>
+          </select>
+          <div class="hint">Choose how the extension behaves when clicking its icon.</div>
+        </div>
+      </div>
+      
+      <div class="option-group">
+        <h3>Custom Templates</h3>
+        <div class="option-row">
+          <label for="customTemplates">Template patterns (one per line):</label>
+          <textarea id="customTemplates" placeholder="[WORK] {title}&#10;{title} - Draft&#10;{domain}: {title}"></textarea>
+          
+          <div class="variable-list">
+            <h4>Available Variables</h4>
+            <div class="variable-item">
+              <span class="variable-name">{title}</span> - Original page title
+            </div>
+            <div class="variable-item">
+              <span class="variable-name">{domain}</span> - Website domain name
+            </div>
+            <div class="variable-item">
+              <span class="variable-name">{date}</span> - Current date
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button id="save">Save Settings</button>
+      <div id="status" class="status"></div>
+    </div>
+
+    <!-- Template Examples Tab -->
+    <div id="templates-content" class="tab-content">
+      <div class="option-group">
+        <h3>Template Examples</h3>
+        <p>Here are some useful templates you can use to rename your tabs. Click on any example to copy it.</p>
+        
+        <div class="example-card">
+          <div class="example-header">Work Context</div>
+          <div class="example-body">[WORK] {title}</div>
+          <div class="example-result">Result: [WORK] How to Create a Chrome Extension</div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Priority Marking</div>
+          <div class="example-body">⭐ {title}</div>
+          <div class="example-result">Result: ⭐ Budget Planning Spreadsheet</div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Domain Identifier</div>
+          <div class="example-body">{domain}: {title}</div>
+          <div class="example-result">Result: github.com: Repository Settings</div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Task Status</div>
+          <div class="example-body">[TODO] {title}</div>
+          <div class="example-result">Result: [TODO] Complete Project Proposal</div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Date Stamping</div>
+          <div class="example-body">{title} ({date})</div>
+          <div class="example-result">Result: Meeting Notes (3/11/2025)</div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Category Tagging</div>
+          <div class="example-body">[{domain}] {title}</div>
+          <div class="example-result">Result: [docs.google.com] Quarterly Report</div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Project Tracking</div>
+          <div class="example-body">[ProjectX] {title}</div>
+          <div class="example-result">Result: [ProjectX] Design Mockups</div>
+        </div>
+      </div>
+      
+      <div class="option-group">
+        <h3>Common Use Cases</h3>
+        
+        <div class="example-card">
+          <div class="example-header">Multiple Work Accounts</div>
+          <div class="example-body">
+            For managing multiple accounts on the same site:<br>
+            [Personal] {title}<br>
+            [Work] {title}<br>
+            [Client] {title}
+          </div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Contextual Organization</div>
+          <div class="example-body">
+            Organizing tabs by project or context:<br>
+            [Research] {title}<br>
+            [Reference] {title}<br>
+            [Meeting] {title}
+          </div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Status Tracking</div>
+          <div class="example-body">
+            Visual tab status indication:<br>
+            ✅ {title} - Completed<br>
+            ⏳ {title} - In Progress<br>
+            🔍 {title} - Under Review
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compatibility Tab -->
+    <div id="compatibility-content" class="tab-content">
+      <div class="option-group">
+        <h3>Where Tab Renamer Works</h3>
+        
+        <ul class="compatibility-list">
+          <li>
+            <div class="icon success-icon">✓</div>
+            <div class="details">
+              <div class="name">Regular Web Pages</div>
+              <div class="description">All standard HTTP and HTTPS websites</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon success-icon">✓</div>
+            <div class="details">
+              <div class="name">Web Applications</div>
+              <div class="description">Web apps like Gmail, Google Docs, and other online services</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon success-icon">✓</div>
+            <div class="details">
+              <div class="name">Local HTML Files</div>
+              <div class="description">HTML files opened from your computer (file:// URLs)</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon success-icon">✓</div>
+            <div class="details">
+              <div class="name">PDF Documents</div>
+              <div class="description">PDF files opened in browser tabs</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon error-icon">✗</div>
+            <div class="details">
+              <div class="name">Chrome Internal Pages</div>
+              <div class="description">Pages starting with chrome:// (settings, extensions, etc.)</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon error-icon">✗</div>
+            <div class="details">
+              <div class="name">Extension Pages</div>
+              <div class="description">Pages starting with chrome-extension:// (including this settings page)</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon error-icon">✗</div>
+            <div class="details">
+              <div class="name">Browser UI</div>
+              <div class="description">The "New Tab" page and other browser interface pages</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="option-group">
+        <h3>Why Some Pages Are Restricted</h3>
+        <p>Chrome extensions have security limitations that prevent them from accessing or modifying certain protected pages:</p>
+        
+        <div class="example-card">
+          <div class="example-header">Security Restrictions</div>
+          <div class="example-body">
+            Chrome's security model prevents extensions from accessing internal browser pages (chrome://, chrome-extension://) to protect the browser's core functionality from potential abuse or exploitation.
+          </div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Content Script Limitations</div>
+          <div class="example-body">
+            Content scripts, which allow extensions to interact with web pages, cannot be injected into browser UI pages or other extensions' pages. This is a fundamental limitation in Chrome's extension architecture.
+          </div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Visual Indication</div>
+          <div class="example-body">
+            When attempting to rename a restricted tab, the extension will display a red "!" badge on its icon to indicate that the operation is not possible on that page.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Tab -->
+    <div id="about-content" class="tab-content">
+      <div class="option-group">
+        <h3>About Simple Tab Renamer</h3>
+        <p>Simple Tab Renamer lets you quickly rename your Chrome tabs to help organize your browser and boost productivity.</p>
+        
+        <div class="example-card">
+          <div class="example-header">How to Use</div>
+          <div class="example-body">
+            <ol>
+              <li>Configure your preferences on this settings page</li>
+              <li>Navigate to any web page you want to rename</li>
+              <li>Click the extension icon in the toolbar</li>
+              <li>Either enter a custom name or select one of your templates</li>
+              <li>Click "Rename" to apply the change</li>
+            </ol>
+          </div>
+        </div>
+        
+        <div class="example-card">
+          <div class="example-header">Features</div>
+          <div class="example-body">
+            <ul>
+              <li>Custom tab names that persist as long as the tab is open</li>
+              <li>Template system for quick, consistent naming</li>
+              <li>Domain-specific preferences</li>
+              <li>Variable support ({title}, {domain}, {date})</li>
+              <li>Sync settings across devices (when signed into Chrome)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="option-group">
+        <h3>Privacy</h3>
+        <p>Simple Tab Renamer respects your privacy:</p>
+        
+        <div class="example-card">
+          <div class="example-body">
+            <ul>
+              <li>No data is sent to external servers</li>
+              <li>All settings are stored locally and in Chrome sync (if enabled)</li>
+              <li>Only uses necessary permissions to function</li>
+              <li>No tracking or analytics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Simple Tab Renamer &copy; 2025 | <a href="#">Report an Issue</a> | <a href="#">GitHub</a></p>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

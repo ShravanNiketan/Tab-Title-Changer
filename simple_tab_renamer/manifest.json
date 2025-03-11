@@ -5,7 +5,8 @@
   "description": "Quickly rename your Chrome tabs with a click",
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "action": {
     "default_icon": {
@@ -21,5 +22,12 @@
   },
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
 }
